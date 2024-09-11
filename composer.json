@@ -1,0 +1,19 @@
+{
+    "name": "wedevelopnl/silverstripe-variables",
+    "type": "silverstripe-vendormodule",
+    "require": {
+        "silverstripe/cms": "^4.0"
+    },
+    "license": "BSD-3-Clause",
+    "autoload": {
+        "psr-4": {
+            "WeDevelop\\Variables\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rens",
+            "email": "rens@wedevelop.nl"
+        }
+    ]
+}

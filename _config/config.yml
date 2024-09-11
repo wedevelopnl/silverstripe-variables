@@ -1,0 +1,27 @@
+---
+Name: wedevelop-variables
+---
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Control\Director:
+    properties:
+      Middlewares:
+        VariablesMiddleware: '%$WeDevelop\Variables\Middleware\VariablesMiddleware'
+  SilverStripe\ORM\FieldType\DBVarchar:
+    class: WeDevelop\Variables\ORM\DBVarchar
+  SilverStripe\ORM\FieldType\DBText:
+    class: WeDevelop\Variables\ORM\DBText
+  SilverStripe\ORM\FieldType\DBHTMLVarchar:
+    class: WeDevelop\Variables\ORM\DBHTMLVarchar
+  SilverStripe\ORM\FieldType\DBHTMLText:
+    class: WeDevelop\Variables\ORM\DBHTMLText
+
+  Varchar:
+    class: WeDevelop\Variables\ORM\DBVarchar
+  Text:
+    class: WeDevelop\Variables\ORM\DBText
+  HTMLVarchar:
+    class: WeDevelop\Variables\ORM\DBHTMLVarchar
+  HTMLText:
+    class: WeDevelop\Variables\ORM\DBHTMLText
+  HTMLFragment:
+    class: WeDevelop\Variables\ORM\DBHTMLText
