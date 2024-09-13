@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WeDevelop\Variables\Model;
 
+use League\Csv\Exception;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLReadonlyField;
 use SilverStripe\Forms\LabelField;
@@ -45,10 +46,12 @@ class Reference extends DataObject
         $fields->removeByName(['VariableID']);
         $fields->dataFieldByName('LastUsed')->setDescription(null);
 
+        $parent =  $this->getParent();
+
         $fields->addFieldsToTab('Root.Main', [
             HTMLReadonlyField::create('ParentLink', 'Parent', sprintf(
                 '<a href="%s">View parent</a>',
-                $this->getParent()->CMSEditLink(),
+                $parent->CMSEditLink(),
             )),
         ], 'LastUsed');
 
@@ -57,7 +60,14 @@ class Reference extends DataObject
 
     public function getParent(): DataObject
     {
-        return DataObject::get_one($this->ParentClass, $this->ParentID);
+        $className = $this->ParentClass;
+        if (!is_subclass_of($className, DataObject::class)) {
+            throw new Exception("Invalid ParentClass: {$className}");
+        }
+
+        $tableName = DataObject::getSchema()->tableName($className);
+
+        return $className::get_one($className, ['"' . $tableName . '"."ID"' => $this->ParentID]);
     }
 
     public function canCreate($member = null, $context = []): bool

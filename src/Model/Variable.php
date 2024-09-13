@@ -13,9 +13,15 @@ use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ORM\FieldType\DBField;
+use WeDevelop\Variables\Admin\VariableAdmin;
 use WeDevelop\Variables\Parser\LocalParser;
 use WeDevelop\Variables\Parser\ParserInterface;
 
+/**
+ * @property string $Name
+ * @property string $Value
+ * @property bool $ValueException
+ */
 class Variable extends DataObject
 {
     public const SEPERATOR = '::';
@@ -114,5 +120,10 @@ class Variable extends DataObject
         }
 
         return Injector::inst()->get(self::config()->parsers[$parser]);
+    }
+
+    public function CMSEditLink(): string
+    {
+        return VariableAdmin::singleton()->getCMSEditLinkForManagedDataObject($this);
     }
 }
