@@ -31,7 +31,7 @@ trait DBVariable
 //        }
 
         $data = preg_replace_callback('/\[([A-Za-z0-9_]+::[^\]]+)\]/', function (array $matches) use ($parent) {
-            $key = $matches[1];
+            $key = html_entity_decode($matches[1]);
             $factory = $this->getFactory();
 
             if (!$factory->has($key)) {
