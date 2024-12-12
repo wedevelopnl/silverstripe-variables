@@ -30,7 +30,7 @@ trait DBVariable
 //            $parent = new $parent->ClassName(['ID' => $parent->ID]);
 //        }
 
-        $data = preg_replace_callback('/\[([A-Za-z0-9_]+::[A-Za-z0-9_:]+)\]/', function (array $matches) use ($parent) {
+        $data = preg_replace_callback('/\[([A-Za-z0-9_]+::[^\]]+)\]/', function (array $matches) use ($parent) {
             $key = $matches[1];
             $factory = $this->getFactory();
 
