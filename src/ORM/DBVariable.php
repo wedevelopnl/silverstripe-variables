@@ -24,6 +24,10 @@ trait DBVariable
             return $data;
         }
 
+        if (!$data) {
+            return $data;
+        }
+
         $parent = SSViewer::topLevel();
         $parent = $parent instanceof ContentController ? $parent->data() : $parent;
 //        if ($parent instanceof ViewableData_Customised) {
