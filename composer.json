@@ -2,7 +2,7 @@
     "name": "wedevelopnl/silverstripe-variables",
     "type": "silverstripe-vendormodule",
     "require": {
-        "silverstripe/cms": "^4.0"
+        "silverstripe/cms": "^4.0 || ^5.0"
     },
     "license": "BSD-3-Clause",
     "autoload": {
