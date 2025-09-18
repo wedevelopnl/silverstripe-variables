@@ -30,9 +30,7 @@ trait DBVariable
 
         $parent = SSViewer::topLevel();
         $parent = $parent instanceof ContentController ? $parent->data() : $parent;
-//        if ($parent instanceof ViewableData_Customised) {
-//            $parent = new $parent->ClassName(['ID' => $parent->ID]);
-//        }
+        $subject = is_array($data) ? $data : (string)$data;
 
         $data = preg_replace_callback('/\[([A-Za-z0-9_]+::[^\]]+)\]/', function (array $matches) use ($parent) {
             $key = html_entity_decode($matches[1]);
@@ -43,7 +41,7 @@ trait DBVariable
             }
 
             return $factory->get($key, $parent)->getValue();
-        }, $data);
+        }, $subject);
 
         return $data;
     }
