@@ -30,6 +30,11 @@ trait DBVariable
 
         $parent = SSViewer::topLevel();
         $parent = $parent instanceof ContentController ? $parent->data() : $parent;
+
+        if (!$parent instanceof DataObject) {
+            return $data;
+        }
+
         $subject = is_array($data) ? $data : (string)$data;
 
         $data = preg_replace_callback('/\[([A-Za-z0-9_]+::[^\]]+)\]/', function (array $matches) use ($parent) {
